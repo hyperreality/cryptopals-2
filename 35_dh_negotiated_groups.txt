@@ -1,19 +1,19 @@
 1. B = p (challenge 34)
-s = B^a % p
-  = p^a % p
+s = B**a % p
+  = p**a % p
   = 0
 
 2. g = 1
-B = g^b % p
-  = 1^b % p
+B = g**b % p
+  = 1**b % p
   = 1
 
 3. g = p
-B = g^b % p
-  = p^b % p
+B = g**b % p
+  = p**b % p
   = 0
 
 4. g = p - 1
-B = g^b % p
-  = (p-1)^b % p
+B = g**b % p
+  = (p-1)**b % p
   = 1

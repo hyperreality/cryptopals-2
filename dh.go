@@ -36,8 +36,7 @@ func nistParams() dhParams {
 
 func makeSecret(params dhParams) dhaA {
 	a := randInt(params.p)
-	A := new(big.Int)
-	A.Exp(params.g, a, params.p)
+	A := new(big.Int).Exp(params.g, a, params.p)
 
 	return dhaA{a: a, A: A}
 }

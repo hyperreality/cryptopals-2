@@ -1,0 +1,7 @@
+Client sends 0 as its A value:
+ - Server calculates S = (A * v**u) ** b % N
+                       = 0 
+ - Client calculates S = (B - k * g**x)**(a + u * x) % N
+   Will still be a large number, but the client can just set S = 0 before calculating K.
+
+It also works if A is a multiple of N.
