@@ -85,11 +85,11 @@ func Eve(alice Network, bob Network) ([]byte, []byte) {
 }
 
 func main() {
-    aliceIn := make(chan interface{}, 3)
-    aliceOut := make(chan interface{}, 3)
+    aliceIn := make(chan interface{})
+    aliceOut := make(chan interface{})
 
-    bobIn := make(chan interface{}, 3)
-    bobOut := make(chan interface{}, 3)
+    bobIn := make(chan interface{})
+    bobOut := make(chan interface{})
 
     var wg sync.WaitGroup
     wg.Add(3)

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"crypto/rand"
 	"math/big"
 )
 
@@ -36,7 +35,7 @@ func nistParams() dhParams {
 }
 
 func makeSecret(params dhParams) dhaA {
-	a, _ := rand.Int(rand.Reader, params.p)
+	a := randInt(params.p)
 	A := new(big.Int)
 	A.Exp(params.g, a, params.p)
 
