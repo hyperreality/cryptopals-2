@@ -1,8 +1,8 @@
 package main
 
 import (
-    "crypto/rand"
-    "math/big"
+	"crypto/rand"
+	"math/big"
 )
 
 func randBytes(size int) []byte {

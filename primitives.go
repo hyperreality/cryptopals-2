@@ -3,7 +3,7 @@ package main
 import (
 	"crypto/aes"
 	"crypto/cipher"
-    "crypto/hmac"
+	"crypto/hmac"
 	"crypto/rand"
 	"crypto/sha256"
 )
@@ -38,4 +38,3 @@ func hmacSHA256(key, msg []byte) []byte {
 
 	return h.Sum(nil)
 }
-

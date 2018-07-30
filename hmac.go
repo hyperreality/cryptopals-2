@@ -1,7 +1,7 @@
 package main
 
 import (
-    "crypto/hmac"
+	"crypto/hmac"
 )
 
 func hmacSHA256(key, msg []byte) []byte {
@@ -10,4 +10,3 @@ func hmacSHA256(key, msg []byte) []byte {
 
 	return h.Sum(nil)
 }
-
