@@ -13,4 +13,5 @@ build 34_dh_mitm primitives.go dh.go network.go random.go
 build 36_srp primitives.go dh.go network.go random.go
 build 38_srp_dictionary_attack primitives.go dh.go network.go random.go
 build 39_rsa random.go rsa.go
+build 40_rsa_crt_attack random.go rsa.go
 
