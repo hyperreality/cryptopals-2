@@ -64,14 +64,13 @@ func forgeSignature(msg string) *big.Int {
 	padded := simplePkcs15Pad(keySize - stuffingSize, hash[:])
 	stuffing := bytes.Repeat([]byte{0xff}, stuffingSize/8)
 	m := append(padded, stuffing...)
-	fmt.Println(m)
 
 	return cbrt(new(big.Int).SetBytes(m))
 }
 
 func main() {
 	keySize = 4096
-	privateKey := generateRsa(4096, 3)
+	privateKey := generateRsa(keySize, 3)
 	publicKey := getPublicKey(privateKey)
 
 	msg := "Test message"

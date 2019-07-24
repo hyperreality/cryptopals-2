@@ -17,4 +17,5 @@ build 40_rsa_crt_attack random.go rsa.go math.go
 
 build 41_rsa_unpadded_recovery_oracle rsa.go random.go
 build 42_rsa_signature_forgery rsa.go random.go math.go
+build 43_dsa_known_nonce dsa.go random.go
 
