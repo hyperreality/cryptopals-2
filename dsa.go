@@ -43,7 +43,7 @@ func matasanoParams() dsaParams {
 		"322a559946a71903f990f1f7e0e025e2d7f7cf494aff1a047"+
 		"0f5b64c36b625a097f1651fe775323556fe00b3608c887892"+
 		"878480e99041be601a62166ca6894bdd41a7054ec89f756ba"+
-"9fc95302291", 16)
+		"9fc95302291", 16)
 
 	return dsaParams{p: p, q: q, g: g}
 }
@@ -52,21 +52,21 @@ func positiveIntLessThan(upperBound *big.Int) *big.Int {
 	x := new(big.Int)
 
 	for {
-        x.SetBytes(randBytes(upperBound.BitLen() / 8))
+		x.SetBytes(randBytes(upperBound.BitLen() / 8))
 
-        if x.Sign() != 0 && x.Cmp(upperBound) < 0 {
-            return x
-        }
+		if x.Sign() != 0 && x.Cmp(upperBound) < 0 {
+			return x
+		}
 	}
 }
 
 func generateDsaKey(params dsaParams) *dsaPrivateKey {
-    x := positiveIntLessThan(params.q)
-    y := new(big.Int).Exp(params.g, x, params.p)
+	x := positiveIntLessThan(params.q)
+	y := new(big.Int).Exp(params.g, x, params.p)
 
-    publicKey := dsaPublicKey{dsaParams: params, y: y}
+	publicKey := dsaPublicKey{dsaParams: params, y: y}
 
-    return &dsaPrivateKey{dsaPublicKey: publicKey, x: x}
+	return &dsaPrivateKey{dsaPublicKey: publicKey, x: x}
 }
 
 func (key *dsaPrivateKey) getDsaPublicKey() *dsaPublicKey {
@@ -74,16 +74,16 @@ func (key *dsaPrivateKey) getDsaPublicKey() *dsaPublicKey {
 }
 
 func dsaHash(msg []byte) *big.Int {
-    hash := sha1.Sum([]byte(msg))
-    return new(big.Int).SetBytes(hash[:])
+	hash := sha1.Sum([]byte(msg))
+	return new(big.Int).SetBytes(hash[:])
 }
 
 func (key *dsaPrivateKey) sign(data []byte) *dsaSignature {
 	for {
-        k := positiveIntLessThan(key.q)
+		k := positiveIntLessThan(key.q)
 
 		r := new(big.Int).Exp(key.g, k, key.p)
-        r = r.Mod(r, key.q)
+		r = r.Mod(r, key.q)
 		if r.Sign() == 0 {
 			continue
 		}

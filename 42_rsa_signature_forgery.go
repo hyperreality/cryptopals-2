@@ -61,7 +61,7 @@ func rsaSign(key *privateKey, msg string) *big.Int {
 func forgeSignature(msg string) *big.Int {
 	stuffingSize := int(0.75 * float64(keySize))
 	hash := sha256.Sum256([]byte(msg))
-	padded := simplePkcs15Pad(keySize - stuffingSize, hash[:])
+	padded := simplePkcs15Pad(keySize-stuffingSize, hash[:])
 	stuffing := bytes.Repeat([]byte{0xff}, stuffingSize/8)
 	m := append(padded, stuffing...)
 
