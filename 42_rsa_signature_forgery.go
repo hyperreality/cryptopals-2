@@ -35,25 +35,9 @@ func brokenVerifier(key *publicKey, msg string, sig *big.Int) bool {
 	return h1 == h2
 }
 
-func simplePkcs15Pad(bits int, hash []byte) []byte {
-	buf := make([]byte, bits/8)
-	pos := len(buf) - len(hash) - 1
-
-	buf[1] = 0x01
-
-	for i := 2; i < pos-1; i++ {
-		buf[i] = byte(0xff)
-	}
-
-	buf[pos] = byte(len(hash))
-	copy(buf[pos+1:], hash)
-
-	return buf
-}
-
 func rsaSign(key *privateKey, msg string) *big.Int {
 	hash := sha256.Sum256([]byte(msg))
-	padded := simplePkcs15Pad(1024, hash[:])
+	padded := simplePkcs15Pad(1024, 0x01, hash[:])
 	m := new(big.Int).SetBytes(padded)
 	return decryptRsa(key, m)
 }
@@ -61,7 +45,7 @@ func rsaSign(key *privateKey, msg string) *big.Int {
 func forgeSignature(msg string) *big.Int {
 	stuffingSize := int(0.75 * float64(keySize))
 	hash := sha256.Sum256([]byte(msg))
-	padded := simplePkcs15Pad(keySize-stuffingSize, hash[:])
+	padded := simplePkcs15Pad(keySize-stuffingSize, 0x01, hash[:])
 	stuffing := bytes.Repeat([]byte{0xff}, stuffingSize/8)
 	m := append(padded, stuffing...)
 

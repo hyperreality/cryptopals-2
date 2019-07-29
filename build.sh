@@ -21,4 +21,4 @@ build 43_dsa_known_nonce dsa.go random.go
 build 44_dsa_repeated_nonce dsa.go random.go
 build 45_dsa_param_tampering dsa.go random.go
 build 46_rsa_parity_oracle random.go rsa.go
-
+build 47_rsa_bleichenbacher_padding_oracle random.go rsa.go

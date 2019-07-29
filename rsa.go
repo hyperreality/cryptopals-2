@@ -75,3 +75,20 @@ func decryptRsaText(key *privateKey, c *big.Int) string {
 
 	return string(decrypted.Bytes())
 }
+
+func simplePkcs15Pad(bits int, mode byte, data []byte) []byte {
+	buf := make([]byte, bits/8)
+	pos := len(buf) - len(data) - 1
+
+	buf[1] = mode
+
+	for i := 2; i < pos-1; i++ {
+		buf[i] = byte(0xff)
+	}
+
+	buf[pos] = byte(len(data))
+	copy(buf[pos+1:], data)
+
+	return buf
+}
+
